@@ -8,17 +8,21 @@
     <artifactId>hello-world-war</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
-    <name>Hello World Web Application Repository</name>
-    <description>Simplest possible Java Webapp</description>
+
+    <name>Hello World Web Application</name>
+    <description>Minimal Java Webapp compatible Java 17+</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jetty.version>11.0.15</jetty.version>
     </properties>
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin -->
+
+            <!-- Compiler plugin pour Java 17 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -29,22 +33,29 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven WAR Plugin -->
+            <!-- WAR plugin moderne -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
 
-            <!-- Jetty Plugin (optionnel pour tests locaux) -->
+            <!-- Jetty plugin pour tests locaux -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>11.0.16</version>
+                <version>${jetty.version}</version>
                 <configuration>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>
